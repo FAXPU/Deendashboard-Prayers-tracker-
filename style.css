@@ -12,6 +12,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.light {
+  background: linear-gradient(135deg, #e0e0f0, #ffffff);
+  color: #1e1e2f;
 }
 
 .container {
@@ -22,6 +28,11 @@ body {
   width: 90%;
   max-width: 500px;
   text-align: center;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.light .container {
+  background: #ffffffcc;
 }
 
 h1 {
@@ -31,12 +42,13 @@ h1 {
 
 .stats {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 25px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-.prayers button, .shop button {
+.prayers button, .shop button, #toggle-theme {
   background: #ffd700;
   color: #1e1e2f;
   border: none;
@@ -48,7 +60,7 @@ h1 {
   transition: 0.3s;
 }
 
-.prayers button:hover, .shop button:hover {
+.prayers button:hover, .shop button:hover, #toggle-theme:hover {
   background: #ffea00;
   transform: scale(1.05);
 }
@@ -62,4 +74,13 @@ h1 {
 
 .shop {
   margin-top: 25px;
+}
+
+.achievements {
+  margin-top: 25px;
+  text-align: left;
+}
+
+#achievements-list li {
+  margin-bottom: 5px;
 }
