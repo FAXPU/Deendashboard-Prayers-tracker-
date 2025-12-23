@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🕌 Prayer Tracker</h1>
+
+    <div class="stats">
+      <div>Streak: <span id="streak">0</span></div>
+      <div>Coins: <span id="coins">0</span></div>
+      <div>Streak Freezes: <span id="freeze">0</span></div>
+    </div>
+
+    <div class="prayers">
+      <h2>Mark your prayers</h2>
+      <div class="prayer-buttons">
+        <button data-prayer="fajr">Fajr</button>
+        <button data-prayer="dhuhr">Dhuhr</button>
+        <button data-prayer="asr">Asr</button>
+        <button data-prayer="maghrib">Maghrib</button>
+        <button data-prayer="isha">Isha</button>
+      </div>
+    </div>
+
+    <div class="shop">
+      <h2>Shop</h2>
+      <button id="buy-freeze">Buy Streak Freeze (50 coins)</button>
+    </div>
+  </div>
+</body>
+</html>
