@@ -8,6 +8,7 @@ let prayersToday = JSON.parse(localStorage.getItem("prayersToday")) || {
   fajr:false, dhuhr:false, asr:false, maghrib:false, isha:false
 };
 let achievements = JSON.parse(localStorage.getItem("achievements")) || [];
+let notificationsSent = JSON.parse(localStorage.getItem("notificationsSent")) || {};
 
 // DOM elements
 const coinsEl = document.getElementById("coins");
@@ -45,6 +46,7 @@ function save() {
   localStorage.setItem("level", level);
   localStorage.setItem("prayersToday", JSON.stringify(prayersToday));
   localStorage.setItem("achievements", JSON.stringify(achievements));
+  localStorage.setItem("notificationsSent", JSON.stringify(notificationsSent));
 }
 
 // XP & Level system
@@ -112,6 +114,7 @@ function resetDaily() {
       achievements.push("All prayers done! Streak increased.");
     }
     prayersToday = { fajr:false, dhuhr:false, asr:false, maghrib:false, isha:false };
+    notificationsSent = {};
     localStorage.setItem("lastDate", today);
     save();
   }
@@ -135,6 +138,38 @@ if (Notification.permission !== "granted" && Notification.permission !== "denied
   Notification.requestPermission();
 }
 
+// Prayer reminder times
+const prayerTimes = {
+  fajr: "05:00",
+  dhuhr: "12:30",
+  asr: "15:45",
+  maghrib: "18:15",
+  isha: "19:45"
+};
+
+// Check reminders every minute
+function checkReminders() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const today = new Date().toDateString();
+
+  Object.entries(prayerTimes).forEach(([prayer, time]) => {
+    const [pHour, pMin] = time.split(":").map(Number);
+    if (hours === pHour && minutes === pMin) {
+      if (!notificationsSent[prayer]) {
+        notify(`Time for ${prayer}! 🕌`);
+        notificationsSent[prayer] = true;
+        save();
+      }
+    }
+  });
+}
+
+// Run reminder checker
+setInterval(checkReminders, 60000);
+
 // Initial setup
 resetDaily();
 updateUI();
+checkReminders();
